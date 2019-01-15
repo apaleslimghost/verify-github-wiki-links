@@ -23,6 +23,7 @@ const formatLink = link =>
   ${chalk.magenta.italic(link.url)}
 )`)
 
+const all = Symbol('all')
 const manual = Symbol('manual')
 const skip = Symbol('skip')
 
@@ -57,9 +58,25 @@ const askValidLinks = ({ base, validWikiPages }) => async node =>
 						name: 'replacement',
 						message: 'closest matches',
 						type: 'list',
-						pageSize: 8,
+						pageSize: 9,
 						choices: candidates
 							.slice(0, 5)
+							.map(
+								candidate => `${base}/${encodeURIComponent(candidate)}${suffix}`
+							)
+							.concat([
+								new inquirer.Separator(),
+								{ name: 'show all files', value: all },
+								{ name: 'enter manually', value: manual },
+								{ name: 'skip this link', value: skip }
+							])
+					},
+					{
+						name: 'replacement',
+						type: 'list',
+						when: ({ replacement }) => replacement === all,
+						pageSize: 8,
+						choices: validWikiPages
 							.map(
 								candidate => `${base}/${encodeURIComponent(candidate)}${suffix}`
 							)
