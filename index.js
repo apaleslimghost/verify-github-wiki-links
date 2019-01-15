@@ -28,9 +28,15 @@ const skip = Symbol('skip')
 
 const askValidLinks = ({ base, validWikiPages }) => async node =>
 	visitLinksAsync(node, async link => {
-		if (link.url !== base && link.url.startsWith(base)) {
+		if (
+			link.url.toLowerCase() !== base.toLowerCase() &&
+			link.url.toLowerCase().startsWith(base.toLowerCase())
+		) {
 			const fileSection = getWikiFileSection(link.url)
-			const suffix = link.url.replace(`${base}/${fileSection}`, '')
+			const suffix = link.url.replace(
+				new RegExp(`${base}/${fileSection}`, 'i'),
+				''
+			)
 
 			if (
 				fileSection !== 'wiki' &&
