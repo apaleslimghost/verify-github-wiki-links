@@ -5,6 +5,7 @@ const leven = require('leven')
 const sortBy = require('lodash.sortby')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
+const escapeStringRegexp = require('escape-string-regexp')
 
 const visitLinksAsync = async (node, visitor) => {
 	if (node.type === 'link') {
@@ -35,7 +36,7 @@ const askValidLinks = ({ base, validWikiPages }) => async node =>
 		) {
 			const fileSection = getWikiFileSection(link.url)
 			const suffix = link.url.replace(
-				new RegExp(`${base}/${fileSection}`, 'i'),
+				new RegExp(`^${base}/${escapeStringRegexp(fileSection)}`, 'i'),
 				''
 			)
 
@@ -130,7 +131,7 @@ module.exports = async function main({ base, folder }) {
 		console.log(chalk.cyan.bold.underline(file))
 		const processed = await processLinks.process(content)
 		await fs.writeFile(p, processed, 'utf8')
-		console.log(chalk.green.bold('✓') + chalk.grey.italic(' done'))
+		console.log(chalk.green.bold('✓') + chalk.grey.italic(' okay'))
 		console.log()
 	}
 }

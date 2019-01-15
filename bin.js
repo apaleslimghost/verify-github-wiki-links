@@ -28,7 +28,7 @@ async function main() {
 	const tempFolder = await tmp.dir({ unsafeCleanup: true })
 	const folder = tempFolder.path
 
-	console.log('cloning...')
+	console.log(`cloning ${repo} into ${folder}...`)
 	await clone({ repo, folder })
 
 	const originalCwd = process.cwd()

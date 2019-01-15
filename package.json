@@ -12,6 +12,7 @@
 	"dependencies": {
 		"@quarterto/sh": "^1.10.0",
 		"chalk": "^2.4.2",
+		"escape-string-regexp": "^1.0.5",
 		"inquirer": "^6.2.1",
 		"leven": "^2.1.0",
 		"lodash.sortby": "^4.7.0",
