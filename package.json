@@ -1,0 +1,30 @@
+{
+	"name": "@quarterto/verify-github-wiki-links",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon --no-stdin bin.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@quarterto/sh": "^1.10.0",
+		"chalk": "^2.4.2",
+		"inquirer": "^6.2.1",
+		"leven": "^2.1.0",
+		"lodash.sortby": "^4.7.0",
+		"mz": "^2.7.0",
+		"remark": "^10.0.1",
+		"unist-util-visit": "^1.4.0"
+	},
+	"devDependencies": {
+		"nodemon": "^1.18.9"
+	},
+	"prettier": {
+		"semi": false,
+		"singleQuote": true,
+		"useTabs": true
+	}
+}
