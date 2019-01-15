@@ -84,8 +84,8 @@ const askValidLinks = ({ base, validWikiPages }) => async node =>
 const getWikiFileSection = url =>
 	path.basename(url.replace(/(\/_edit)?(#.*)?$/g, ''))
 
-module.exports = async function main({ base }) {
-	const files = (await fs.readdir('wiki')).filter(
+module.exports = async function main({ base, folder }) {
+	const files = (await fs.readdir(folder)).filter(
 		file => path.extname(file) === '.md'
 	)
 
@@ -101,7 +101,7 @@ module.exports = async function main({ base }) {
 		})
 
 	for (const file of files) {
-		const p = path.join('wiki', file)
+		const p = path.join(folder, file)
 		const content = await fs.readFile(p, 'utf8')
 
 		console.log(chalk.cyan.bold.underline(file))
