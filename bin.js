@@ -1,24 +1,14 @@
 #!/usr/bin/env node
 
 const verifyLinks = require('./')
-const sh = require('@quarterto/sh')
 const tmp = require('tmp-promise')
+const exec = require('util').promisify(require('child_process').exec)
 
-const clone = sh`
-git clone "${({ repo }) => repo}" "${({ folder }) => folder}"
-`
-
-const diff = sh`
-git diff --stat
-`
-
-const commit = sh`
-git commit -am "${({ message }) => message}"
-`
-
-const push = sh`
-git push
-`
+const clone = ({ repo, folder }) => exec(`git clone "${repo}" "${folder}"`)
+const diff = ({ folder }) => exec(`git diff --stat`, { cwd: folder })
+const commit = ({ message, folder }) =>
+	exec(`git commit -am "${message}"`, { cwd: folder })
+const push = ({ folder }) => exec(`git push`, { cwd: folder })
 
 async function main() {
 	const repoPath = process.argv[2]
@@ -38,9 +28,9 @@ async function main() {
 
 	await verifyLinks({ base, folder })
 
+	await diff({ folder })
+	await commit({ message: 'fixed broken links', folder })
 	process.chdir(originalCwd)
-	await diff()
-	await commit({ message: 'fixed broken links' })
 
 	await tempFolder.cleanup()
 }
