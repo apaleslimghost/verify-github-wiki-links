@@ -67,7 +67,7 @@ const askValidLinks = ({ base, validWikiPages }) => async node =>
 							)
 							.concat([
 								new inquirer.Separator(),
-								{ name: 'show all files', value: all },
+								{ name: 'show all wiki pages', value: all },
 								{ name: 'enter manually', value: manual },
 								{ name: 'skip this link', value: skip }
 							])
