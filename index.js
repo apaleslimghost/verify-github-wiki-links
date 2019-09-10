@@ -44,7 +44,7 @@ const askValidLinks = ({ base, validWikiPages }) => async node =>
 				fileSection !== 'wiki' &&
 				!validWikiPages.some(
 					page =>
-						page.toLowerCase() === decodeURIComponent(fileSection).toLowerCase()
+						page === decodeURIComponent(fileSection)
 				)
 			) {
 				const candidates = sortBy(validWikiPages, page =>
