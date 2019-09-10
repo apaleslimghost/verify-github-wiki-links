@@ -11,7 +11,6 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
-		"@quarterto/sh": "^1.10.0",
 		"chalk": "^2.4.2",
 		"escape-string-regexp": "^1.0.5",
 		"inquirer": "^6.2.1",
@@ -19,8 +18,7 @@
 		"lodash.sortby": "^4.7.0",
 		"mz": "^2.7.0",
 		"remark": "^10.0.1",
-		"tmp-promise": "^1.0.5",
-		"unist-util-visit": "^1.4.0"
+		"tmp-promise": "^1.0.5"
 	},
 	"devDependencies": {
 		"nodemon": "^1.18.9"
